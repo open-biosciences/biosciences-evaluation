@@ -1,36 +1,70 @@
 # biosciences-evaluation
 
-Evaluation rubrics, quality metrics, and testing standards for the Open Biosciences platform.
+Quality gate layer for the Open Biosciences platform. Defines evaluation rubrics, quality metrics,
+and cross-repo standards that hold all platform components accountable — without introducing coupling.
 
 Part of the [Open Biosciences](https://github.com/open-biosciences) multi-repo platform.
 
 ## Status
 
-**Wave 4 (Validation) — migration pending.** This repository is a target for Wave 4 of the platform migration. Content will be populated once Waves 1-3 (Foundation, Platform, Orchestration) are complete.
+**Wave 4 (Validation) — Not Started.** This repository will receive new content (not migrated from
+a predecessor repo) once Waves 2 and 3 are complete and operational agents exist to measure.
 
-## What Will Be Here
+- Waves 1 + 2 (Foundation + Platform): Complete
+- Wave 3 (Orchestration): Complete
+- Wave 4 (Validation): Not Started — prerequisite: Waves 2 + 3
 
-- Evaluation rubrics for MCP server quality, agent performance, and research output accuracy
-- Quality metrics definitions (test coverage thresholds, API response accuracy, knowledge graph completeness)
-- Cross-repo test quality standards and enforcement gates
+## Role
 
-This repo serves as a **quality gate layer** — it reads from all other repos but no repo depends on it. It provides observability and accountability without introducing coupling.
+`biosciences-evaluation` is the **quality gate layer** of the platform. It reads from all other
+repos but no repo depends on it. This design provides observability and accountability without
+introducing coupling: any repo can evolve independently; evaluation simply re-measures.
+
+## What Will Be Here (Wave 4)
+
+### Evaluation Rubrics
+
+Three measurement dimensions covering the full platform stack:
+
+| Dimension | What It Measures |
+|-----------|-----------------|
+| MCP server quality | Response accuracy, identifier resolution fidelity (CURIE correctness), error handling coverage |
+| Agent performance | Phase completion rates, hallucination detection, CURIE resolution accuracy across LangGraph and Temporal agents |
+| Research output accuracy | Knowledge graph completeness, cross-source consistency, provenance traceability |
+
+### Quality Metrics Definitions
+
+Concrete thresholds and benchmarks applied across all repos:
+
+- **Test coverage**: per-server minimums (unit coverage ≥80% for new code)
+- **API response accuracy**: benchmarks for each of the 12 MCP servers
+- **Knowledge graph completeness**: standards for entity and relationship coverage
+
+### Cross-Repo Standards and Enforcement Gates
+
+- Ruff + pyright clean on all Python files
+- Integration test required for every MCP server tool
+- ADR compliance verified for schema changes
+- pytest marker discipline: `unit`, `integration`, `e2e`
 
 ## Owner
 
-Quality & Skills Engineer agent (also owns `biosciences-skills`).
+**Quality & Skills Engineer (Agent 8)** — also owns
+[biosciences-skills](https://github.com/open-biosciences/biosciences-skills).
 
-## Dependencies
+## Dependency Direction
 
-| Dependency | Relationship |
-|-----------|-------------|
-| All platform repos | Reads metrics and test results from each |
+| Relationship | Direction |
+|-------------|-----------|
+| All platform repos | This repo reads from them; they do not depend on it |
+
+This repo has no upstream code dependencies. It is a consumer, not a provider.
 
 ## Related Repos
 
 - [biosciences-skills](https://github.com/open-biosciences/biosciences-skills) — Domain skills and SpecKit commands (same owner)
-- [biosciences-mcp](https://github.com/open-biosciences/biosciences-mcp) — MCP servers evaluated for quality
-- [biosciences-architecture](https://github.com/open-biosciences/biosciences-architecture) — ADRs and standards this repo enforces
+- [biosciences-mcp](https://github.com/open-biosciences/biosciences-mcp) — Primary subject of MCP quality rubrics (12 FastMCP servers, 697+ tests)
+- [biosciences-architecture](https://github.com/open-biosciences/biosciences-architecture) — ADRs and platform standards this repo enforces
 
 ## License
 
