@@ -64,7 +64,7 @@ This repo has no upstream code dependencies. It is a consumer, not a provider.
 
 - [biosciences-skills](https://github.com/open-biosciences/biosciences-skills) — Domain skills and SpecKit commands (same owner)
 - [biosciences-mcp](https://github.com/open-biosciences/biosciences-mcp) — Primary subject of MCP quality rubrics (12 FastMCP servers, 697+ tests)
-- [biosciences-architecture](https://github.com/open-biosciences/biosciences-architecture) — ADRs and platform standards this repo enforces
+- [biosciences-program](https://github.com/open-biosciences/biosciences-program) — ADRs, governance, and platform standards this repo enforces
 
 ## License
 
